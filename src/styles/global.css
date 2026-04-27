@@ -259,6 +259,48 @@ html, body {
 }
 .theme-item strong { color: var(--text); white-space: nowrap; }
 
+/* ── LocoLab callout ── */
+.locolab-callout {
+  margin-top: 4rem;
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--gray-4) 0%, var(--gray-5) 100%);
+  box-shadow: 0 0 32px var(--accent-glow);
+  overflow: hidden;
+}
+.locolab-callout-inner {
+  display: flex;
+  gap: 3rem;
+  padding: 2rem 2.5rem;
+}
+.locolab-left { flex: 1; min-width: 0; }
+.locolab-right { flex: 1; min-width: 0; display: flex; align-items: center; }
+.locolab-label {
+  font-size: 0.62rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.4rem;
+}
+.locolab-name {
+  font-size: 1.75rem; font-weight: 700; color: var(--text);
+  letter-spacing: -0.02em; margin-bottom: 0.75rem;
+}
+.locolab-desc {
+  font-size: 0.88rem; color: var(--gray-1); line-height: 1.7; margin-bottom: 1.25rem;
+}
+.locolab-link {
+  display: inline-block; font-size: 0.88rem; font-weight: 600;
+  color: var(--accent); text-decoration: none; transition: opacity 0.15s;
+}
+.locolab-link:hover { opacity: 0.8; }
+.locolab-projects { display: flex; flex-direction: column; gap: 0.75rem; }
+.locolab-project {
+  font-size: 0.82rem; color: var(--gray-1); line-height: 1.5;
+  padding-left: 0.75rem; border-left: 2px solid var(--gray-3);
+}
+.locolab-project strong { color: var(--accent-high); }
+@media (max-width: 700px) {
+  .locolab-callout-inner { flex-direction: column; gap: 1.5rem; }
+}
+
 /* ── Footer ── */
 .site-footer {
   margin-top: 5rem;
