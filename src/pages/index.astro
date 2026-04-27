@@ -1,0 +1,185 @@
+---
+import Base from '../layouts/Base.astro';
+import { papers, studies, statusLabel, statusColor } from '../data/research';
+
+const submitted = papers.filter(p => p.status === 'submitted' || p.status === 'under-review');
+const drafts    = papers.filter(p => p.status === 'draft');
+const published = papers.filter(p => p.status === 'accepted' || p.status === 'published');
+---
+<Base title="research.borck.dev — Michael Borck">
+
+<!-- Topbar -->
+<div class="topbar">
+  <a href="/" class="topbar-logo">
+    <span>research</span><span class="dot">.</span><span class="sub">borck.dev</span>
+  </a>
+  <div class="topbar-spacer"></div>
+  <nav class="topbar-links">
+    <a href="https://borck.dev">borck.dev</a>
+    <a href="https://locolabo.org">LocoLab</a>
+    <a href="https://borck.education">Tools</a>
+    <a href="https://github.com/michael-borck">GitHub</a>
+  </nav>
+</div>
+
+<div class="page">
+
+  <!-- Hero -->
+  <div class="hero">
+    <p class="hero-eyebrow">Michael Borck · Curtin University</p>
+    <h1 class="hero-title">AI, education, and<br />human-computer interaction</h1>
+    <p class="hero-sub">
+      I lead <a href="https://locolabo.org" style="color:var(--accent);text-decoration:none">LocoLab</a>,
+      an applied AI research initiative at the School of Marketing and Management, Curtin University.
+      We study what local, privacy-first AI can do for teaching and learning — on modest consumer hardware,
+      honestly benchmarked.
+    </p>
+    <blockquote class="hero-quote">
+      "We map the floor because most people live there, and nobody is documenting it honestly."
+    </blockquote>
+  </div>
+
+  <!-- Submitted papers -->
+  {submitted.length > 0 && (
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">Under Submission</span>
+        <span class="section-count">{submitted.length} papers</span>
+      </div>
+      <div class="paper-list">
+        {submitted.map(p => (
+          <div class="paper-card">
+            <div class="paper-top">
+              <span class="paper-status" style={`color:${statusColor[p.status]};border-color:${statusColor[p.status]}22`}>
+                {statusLabel[p.status]}
+              </span>
+              <span class="paper-year">{p.year}</span>
+              {p.tags.slice(0,2).map(t => <span class="paper-tag">{t}</span>)}
+            </div>
+            <div class="paper-title">{p.title}</div>
+            <div class="paper-authors">{p.authors.join(', ')}</div>
+            <p class="paper-abstract">{p.abstract}</p>
+            <div class="paper-links">
+              <a href={p.pdfUrl ?? '#'} class={`paper-link${p.pdfUrl ? '' : ' placeholder'}`}>PDF</a>
+              <a href={p.codeUrl ?? '#'} class={`paper-link${p.codeUrl ? '' : ' placeholder'}`}>Code</a>
+              <a href={p.dataUrl ?? '#'} class={`paper-link${p.dataUrl ? '' : ' placeholder'}`}>Data</a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- Published / Accepted -->
+  {published.length > 0 && (
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">Published</span>
+        <span class="section-count">{published.length} papers</span>
+      </div>
+      <div class="paper-list">
+        {published.map(p => (
+          <div class="paper-card">
+            <div class="paper-top">
+              <span class="paper-status" style={`color:${statusColor[p.status]};border-color:${statusColor[p.status]}22`}>
+                {statusLabel[p.status]}
+              </span>
+              {p.venue && <span class="paper-year">{p.venue} · {p.year}</span>}
+              {p.tags.slice(0,2).map(t => <span class="paper-tag">{t}</span>)}
+            </div>
+            <div class="paper-title">{p.title}</div>
+            <div class="paper-authors">{p.authors.join(', ')}</div>
+            <p class="paper-abstract">{p.abstract}</p>
+            <div class="paper-links">
+              {p.doiUrl  && <a href={p.doiUrl}  class="paper-link">DOI ↗</a>}
+              {p.pdfUrl  && <a href={p.pdfUrl}  class="paper-link">PDF</a>}
+              {p.codeUrl && <a href={p.codeUrl} class="paper-link">Code</a>}
+              {p.dataUrl && <a href={p.dataUrl} class="paper-link">Data</a>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- Draft / In progress -->
+  {drafts.length > 0 && (
+    <div class="section">
+      <div class="section-header">
+        <span class="section-title">In Progress</span>
+        <span class="section-count">{drafts.length} papers</span>
+      </div>
+      <div class="paper-list">
+        {drafts.map(p => (
+          <div class="paper-card">
+            <div class="paper-top">
+              <span class="paper-status" style={`color:${statusColor[p.status]};border-color:${statusColor[p.status]}22`}>
+                {statusLabel[p.status]}
+              </span>
+              <span class="paper-year">{p.year}</span>
+              {p.tags.slice(0,2).map(t => <span class="paper-tag">{t}</span>)}
+            </div>
+            <div class="paper-title">{p.title}</div>
+            <div class="paper-authors">{p.authors.join(', ')}</div>
+            <p class="paper-abstract">{p.abstract}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+
+  <!-- Active studies -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Research Studies</span>
+      <span class="section-count">{studies.length} studies</span>
+    </div>
+    <div class="study-grid">
+      {studies.map(s => (
+        <div class="study-card">
+          <div class="study-card-top">
+            <span class="study-card-title">{s.title}</span>
+            <span class={`study-badge ${s.status}`}>{s.status}</span>
+          </div>
+          <p class="study-card-desc">{s.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Research themes -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Themes</span>
+    </div>
+    <div class="theme-list">
+      <div class="theme-item">
+        <strong>AI in Education</strong>
+        How local, privacy-first AI tools change the teaching and learning dynamic — from assessment to simulation to tutoring.
+      </div>
+      <div class="theme-item">
+        <strong>Human-Computer Interaction</strong>
+        How people interact with AI systems, especially when hardware constraints shape the experience.
+      </div>
+      <div class="theme-item">
+        <strong>Constraint-Driven Innovation</strong>
+        What emerges when you take away the cloud, the budget, and the assumptions. Honest benchmarks on modest hardware.
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-links">
+      <a href="https://borck.dev">borck.dev</a>
+      <a href="https://locolabo.org">LocoLab</a>
+      <a href="https://borck.education">borck.education</a>
+      <a href="https://github.com/michael-borck">GitHub</a>
+      <a href="mailto:michael@borck.dev">michael@borck.dev</a>
+    </div>
+    <span>Curtin University · Perth, WA</span>
+  </footer>
+
+</div>
+
+</Base>
