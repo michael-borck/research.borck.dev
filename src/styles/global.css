@@ -264,7 +264,7 @@ html, body {
 }
 .theme-item strong { color: var(--text); white-space: nowrap; }
 
-/* ── LocoLab callout ── */
+/* ── LocoLabo callout ── */
 .locolab-callout {
   margin-top: 4rem;
   border: 1px solid var(--accent);
