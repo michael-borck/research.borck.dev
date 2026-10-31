@@ -16,7 +16,7 @@ const published = papers.filter(p => p.status === 'accepted' || p.status === 'pu
   <div class="topbar-spacer"></div>
   <nav class="topbar-links">
     <a href="https://borck.education" title="Tools, books, and teaching for educators and students">Education</a>
-    <a href="https://resume.borck.dev" title="CV in 10 formats from a single YAML data source">Resume</a>
+    <a href="https://resume.borck.dev" title="CV in twelve ways from a single YAML data source">Resume</a>
     <a href="https://borck.dev" title="Builder, educator, researcher, and consultant">borck.dev</a>
   </nav>
 </div>
@@ -28,7 +28,7 @@ const published = papers.filter(p => p.status === 'accepted' || p.status === 'pu
     <p class="hero-eyebrow">Michael Borck</p>
     <h1 class="hero-title">AI, education, and<br />human-computer interaction</h1>
     <p class="hero-sub">
-      I lead <a href="https://locolabo.org" style="color:var(--accent);text-decoration:none">LocoLab</a>,
+      I lead <a href="https://locolabo.org" style="color:var(--accent);text-decoration:none">LocoLabo</a>,
       an applied AI research initiative studying what local, privacy-first AI can do for teaching and learning —
       on modest consumer hardware, honestly benchmarked.
     </p>
@@ -46,7 +46,7 @@ const published = papers.filter(p => p.status === 'accepted' || p.status === 'pu
       </div>
       <div class="paper-list">
         {submitted.map(p => (
-          <div class="paper-card">
+          <div class="paper-card" id={p.slug}>
             <div class="paper-top">
               <span class="paper-status" style={`color:${statusColor[p.status]};border-color:${statusColor[p.status]}22`}>
                 {statusLabel[p.status]}
@@ -72,12 +72,12 @@ const published = papers.filter(p => p.status === 'accepted' || p.status === 'pu
   {published.length > 0 && (
     <div class="section">
       <div class="section-header">
-        <span class="section-title">Published</span>
+        <span class="section-title">Accepted &amp; Published</span>
         <span class="section-count">{published.length} papers</span>
       </div>
       <div class="paper-list">
         {published.map(p => (
-          <div class="paper-card">
+          <div class="paper-card" id={p.slug}>
             <div class="paper-top">
               <span class="paper-status" style={`color:${statusColor[p.status]};border-color:${statusColor[p.status]}22`}>
                 {statusLabel[p.status]}
@@ -109,7 +109,7 @@ const published = papers.filter(p => p.status === 'accepted' || p.status === 'pu
       </div>
       <div class="paper-list">
         {drafts.map(p => (
-          <div class="paper-card">
+          <div class="paper-card" id={p.slug}>
             <div class="paper-top">
               <span class="paper-status" style={`color:${statusColor[p.status]};border-color:${statusColor[p.status]}22`}>
                 {statusLabel[p.status]}
